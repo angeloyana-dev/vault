@@ -1,4 +1,5 @@
 import os
+import getpass
 from termcolor import colored as clr
 from hashlib import sha256
 from modules.prompt import Prompt, error, success
@@ -11,7 +12,7 @@ def login():
 	with open(master_key_path, 'r') as mkfile:
 		master_key = mkfile.read()
 	while True:
-		input_master_key = input('Enter your master key: ')
+		input_master_key = getpass.getpass('Enter your master key: ')
 		# Compare keys
 		if sha256(input_master_key.encode('utf8')).hexdigest() == master_key:
 			success('Master key confirmed, Welcome back!')
@@ -22,8 +23,8 @@ def login():
 	
 def create_master_key():
 	while True:
-		initial_master_key = input('Create master key: ')
-		confirm_master_key = input('Confirm master key: ')
+		initial_master_key = getpass.getpass('Create master key: ')
+		confirm_master_key = getpass.getpass('Confirm master key: ')
 		if initial_master_key == confirm_master_key:
 			hashed_master_key = sha256(initial_master_key.encode('utf8')).hexdigest()
 			break

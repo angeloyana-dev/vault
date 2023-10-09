@@ -5,10 +5,10 @@ from modules.display_help import display_help
 from modules.data_manager import DataManager
 
 def error(message):
-	print(clr(message, 'red'))
+	print(clr(f'\u2716 {message}', 'red'))
 
 def success(message):
-	print(clr(message, 'green'))
+	print(clr(f'\u2714 {message}', 'green'))
 
 class Prompt:
 	def __init__(self, master_key, credentials_path):
@@ -42,6 +42,7 @@ class Prompt:
 				success(f'Succesfully saved key for {name}!')
 				break
 			else:
+				error('Cancelled')
 				break
 			
 	def add_multiple(self):
@@ -56,6 +57,7 @@ class Prompt:
 				success(f'Succesfully saved username and password for {name}!')
 				break
 			else:
+				error('Cancelled')
 				break
 			
 	def list_keys(self):
